@@ -2,7 +2,7 @@ module "keypair" {
   source  = "mitchellh/dynamic-keys/aws"
   version = "2.0.0"
   path    = "${path.root}/keys"
-  name    = "${var.identity}-key-foreach-git"
+  name    = "${var.identity}-key-foreach-git-branch"
 }
 
 module "server" {
