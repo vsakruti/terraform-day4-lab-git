@@ -10,6 +10,7 @@ module "server" {
   identity     = var.identity
   access_key   = var.access_key
   secret_key   = var.secret_key
+  region = var.region
   student_name = var.student_name
   student_id   = var.student_id
   key_name     = module.keypair.key_name
