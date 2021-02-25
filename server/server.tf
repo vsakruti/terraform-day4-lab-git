@@ -37,45 +37,7 @@ resource "aws_instance" "caddi_web" {
     "Name"        = "${var.student_name}-${each.key}"
     "Environment" = each.value.environment
   }
-
-  connection {
-    user        = "ubuntu"
-    private_key = var.private_key
-    host        = self.public_ip
-  }
-
-  provisioner "file" {
-    source      = "../assets"
-    destination = "/tmp/"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo sh /tmp/assets/setup-web.sh",
-    ]
-  }
-
 }
-
-/*
-resource "null_resource" "web_cluster" {
-  # Changes to any instance of the cluster requires re-provisioning
-  triggers = {
-    web_cluster_instance_ids = "${join(",",
-    { for p in sort(keys(var.servers)) : p => aws_instance.caddi_web[p].id })}"
-  }
-
-  # Bootstrap script can run on any instance of the cluster
-  # So we just choose the first in this case
-  connection {
-    host = element(aws_instance.caddi_web.*.public_ip, 0)
-  }
-
-  provisioner "local-exec" {
-    # Bootstrap script called with private_ip of each node in the clutser
-    command = "echo Nodes of the Cluster: ${join(", ", aws_instance.caddi_web.*.private_ip)}"
-  }
-} */
 
 output "caddi_public_dns" {
   description = "Public DNS names of the Servers"
