@@ -13,7 +13,7 @@ variable "servers" {
     },
     server-apache = {
       ami                    = "ami-07f5c641c23596eb9"
-      instance_type          = "t2.nano",
+      instance_type          = "t2.micro",
       environment            = "test"
       subnet_id              = "subnet-031bf0c9a309fcd8d"
       vpc_security_group_ids = ["sg-01380b40dc19ad166"]
